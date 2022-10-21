@@ -23,4 +23,6 @@ app.use((req, res, next) => {
 
 app.use('/api/auth', userRouter)
 
+
+
 module.exports = app;
