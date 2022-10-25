@@ -13,11 +13,11 @@ router.get('/:id', auth, sauceCtrl.getSauceById)
 
 router.post('/', auth, multer, sauceCtrl.createSauce )
 
-/*router.put('/:id', auth, )
+router.put('/:id', auth, sauceCtrl.editSauce) //revenir pour la modification d'image
 
-router.delete('/:id', auth, )
+router.delete('/:id', auth, sauceCtrl.deleteSauce)
 
-router.post('/:id/like', auth, )*/
+//router.post('/:id/like', auth, )
 
 
 module.exports = router
