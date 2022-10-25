@@ -11,15 +11,16 @@ exports.getAllSauce = (req, res, next) => {
 
 exports.getSauceById = (req, res, next) => {
     console.log('getSauceById')
+    console.log(req.params.id)
 
-    Sauce.find(req.body)
+    Sauce.findById(req.params.id)
         .then(sauce => res.status(200).json( sauce ))
         .catch(error => res.status(400).json( error ))
 }
 
 exports.createSauce = (req, res, next) => {
     console.log('createSauce')
-    
+
     const sauceObject = JSON.parse(req.body.sauce)
 
     const sauce = new Sauce({ 

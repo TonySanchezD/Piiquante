@@ -9,7 +9,7 @@ const sauceCtrl = require('../controllers/sauce')
 
 router.get('/', auth, sauceCtrl.getAllSauce)
 
-//router.get('/:id', auth, )
+router.get('/:id', auth, sauceCtrl.getSauceById)
 
 router.post('/', auth, multer, sauceCtrl.createSauce )
 
