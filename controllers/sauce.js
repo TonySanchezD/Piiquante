@@ -9,9 +9,17 @@ exports.getAllSauce = (req, res, next) => {
         .catch(error => res.status(400).json( error ))
 }
 
+exports.getSauceById = (req, res, next) => {
+    console.log('getSauceById')
+
+    Sauce.find(req.body)
+        .then(sauce => res.status(200).json( sauce ))
+        .catch(error => res.status(400).json( error ))
+}
+
 exports.createSauce = (req, res, next) => {
     console.log('createSauce')
-
+    
     const sauceObject = JSON.parse(req.body.sauce)
 
     const sauce = new Sauce({ 

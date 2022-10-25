@@ -17,8 +17,7 @@ router.post('/', auth, multer, sauceCtrl.createSauce )
 
 router.delete('/:id', auth, )
 
-router.post('/:id/like', auth, )
+router.post('/:id/like', auth, )*/
 
-exports.module = router*/
 
 module.exports = router
