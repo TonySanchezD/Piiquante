@@ -17,7 +17,7 @@ router.put('/:id', auth, multer, sauceCtrl.editSauce) //revenir pour la modifica
 
 router.delete('/:id', auth, sauceCtrl.deleteSauce)
 
-//router.post('/:id/like', auth, sauceCtrl.addLikeDislike)
+router.post('/:id/like', auth, sauceCtrl.addLikeDislike)
 
 
 module.exports = router
