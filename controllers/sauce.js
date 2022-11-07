@@ -62,15 +62,6 @@ exports.editSauce = (req, res, next) => {
 }
 
 exports.deleteSauce = (req, res, next) => {
-    // Supprimer l'image dans le dossier image
-    /*Sauce.findById(req.params.id) 
-        .then((sauce) => {
-            const imageSplit = sauce.imageUrl.split("/")
-            const image = imageSplit[4]
-            [`http://localhost:3000/images/${image}`].remove()
-        })
-        .catch(error => console.log("Error delete image", error))*/
-
     Sauce.deleteOne({_id: req.params.id})
         .then(() => res.status(200).json({ message: "Sauce supprimé !"}))
         .catch(error => res.status(400).json({ message: "La sauce na pas pue être supprimé !", error}))
@@ -81,13 +72,13 @@ exports.addLikeDislike = (req, res, next) => {
 
     Sauce.findById(req.params.id)
         .then((sauce) => {
-            console.log(sauce)
 
             if (req.body.like == 1) { // Like
                 console.log("addLike")
 
                 Sauce.updateOne({_id: req.params.id}, {$push: {usersLiked: req.auth.userId}, likes: sauce.usersLiked.length +1})
                     .then(() => res.status(200).json({message: "Mise à jour des likes"}))
+                    console.log(sauce)
                     .catch(error => console.log("addLike error", error))
                     
             } else if (req.body.like == -1) { // Dislike
@@ -95,17 +86,19 @@ exports.addLikeDislike = (req, res, next) => {
 
                 Sauce.updateOne({_id: req.params.id}, {$push: {usersDisliked: req.auth.userId}, dislikes: sauce.usersDisliked.length +1})
                     .then(() => res.status(200).json({message: "Mise à jour des dislikes"}))  
+                    console.log(sauce)
                     .catch(error => console.log("addDislike error", error))
                 
             } else if (req.body.like == 0) { // No like no dislike
                 console.log("noLikeNoDislike")
 
-                if(sauce.usersLiked.includes(req.auth.userId)){ // BUG !!!!!!!!!!
+                if(sauce.usersLiked.includes(req.auth.userId)){ 
                     console.log("Si l'utilisateur avait like") // Si l'utilisateur avait like
                     console.log(sauce.usersLiked.find((user) => user = req.auth.userId))
 
                     Sauce.updateOne({_id: req.params.id}, {$pull: {usersLiked: req.auth.userId}, likes: sauce.usersLiked.length -1})
                         .then(() => res.status(200).json({message: "Mise à jour des like dislike"}))
+                        console.log(sauce)
                         .catch(error => console.log("noLike error", error))
 
                 } else {
@@ -113,10 +106,10 @@ exports.addLikeDislike = (req, res, next) => {
 
                     Sauce.updateOne({_id: req.params.id}, {$pull: {usersDisliked: req.auth.userId}, dislikes: sauce.usersDisliked.length -1})
                         .then(() => res.status(200).json({message: "Mise à jour des like dislike"}))
+                        console.log(sauce)
                         .catch(error => console.log("noDislike error", error))
                 }
             } 
         })
         .catch(error => console.log("noLikeNoDislike error", error))
-    
 }

@@ -13,7 +13,7 @@ router.get('/:id', auth, sauceCtrl.getSauceById)
 
 router.post('/', auth, multer, sauceCtrl.createSauce )
 
-router.put('/:id', auth, multer, sauceCtrl.editSauce) //revenir pour la modification d'image
+router.put('/:id', auth, multer, sauceCtrl.editSauce)
 
 router.delete('/:id', auth, sauceCtrl.deleteSauce)
 
